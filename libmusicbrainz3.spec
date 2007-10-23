@@ -51,7 +51,12 @@ applications which will use libmusicbrainz.
 %setup -q -n %{package_name}-%{version}
 
 %build
-cmake . -DCMAKE_INSTALL_PREFIX=%_prefix
+cmake . -DCMAKE_INSTALL_PREFIX=%_prefix \
+%if "%_lib" != "lib"
+    -DLIB_SUFFIX=64 \
+%endif
+
+
 %make
 
 

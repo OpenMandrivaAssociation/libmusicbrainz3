@@ -14,6 +14,7 @@ Summary:	A software library for accesing MusicBrainz servers
 Source:		http://ftp.musicbrainz.org/pub/musicbrainz/%{package_name}-%{version}.tar.gz
 URL:		http://www.musicbrainz.org
 Group:		Sound
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 License:	LGPL
 BuildRequires:  cmake
 BuildRequires:  libneon-devel

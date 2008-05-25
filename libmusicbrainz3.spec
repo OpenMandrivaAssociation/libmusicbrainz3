@@ -1,6 +1,6 @@
 %define package_name    libmusicbrainz
 %define	version	3.0.1
-%define release	%mkrel 2
+%define release	%mkrel 3
 
 %define api 3
 %define major 6
@@ -12,10 +12,11 @@ Version:	%{version}
 Release:	%{release}
 Summary:	A software library for accesing MusicBrainz servers
 Source:		http://ftp.musicbrainz.org/pub/musicbrainz/%{package_name}-%{version}.tar.gz
-URL:		http://www.musicbrainz.org
+Patch: libmusicbrainz-3.0.1-gcc4.3.patch
+URL:		http://musicbrainz.org/doc/libmusicbrainz
 Group:		Sound
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
-License:	LGPL
+License:	LGPLv2+
 BuildRequires:  cmake
 BuildRequires:  libneon-devel
 BuildRequires:  libdiscid-devel
@@ -49,6 +50,7 @@ applications which will use libmusicbrainz.
 
 %prep
 %setup -q -n %{package_name}-%{version}
+%patch -p1
 
 %build
 cmake . -DCMAKE_INSTALL_PREFIX=%_prefix \

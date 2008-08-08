@@ -1,6 +1,6 @@
 %define package_name    libmusicbrainz
 %define	version	3.0.1
-%define release	%mkrel 3
+%define release	%mkrel 4
 
 %define api 3
 %define major 6

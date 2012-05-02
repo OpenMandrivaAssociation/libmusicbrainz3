@@ -17,7 +17,7 @@ Group:		Sound
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 License:	LGPLv2+
 BuildRequires:  cmake
-BuildRequires:  libneon-devel
+BuildRequires:  neon-devel
 BuildRequires:  libdiscid-devel
 BuildRequires:  libcppunit-devel
 

@@ -1,6 +1,6 @@
 %define package_name    libmusicbrainz
 %define	version	3.0.3
-%define release	%mkrel 3
+%define release	%mkrel 2
 
 %define api 3
 %define major 6
@@ -17,7 +17,7 @@ Group:		Sound
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 License:	LGPLv2+
 BuildRequires:  cmake
-BuildRequires:  neon-devel
+BuildRequires:  pkgconfig(neon)
 BuildRequires:  libdiscid-devel
 BuildRequires:  libcppunit-devel
 
@@ -88,3 +88,51 @@ rm -rf %{buildroot}
 %{_includedir}/musicbrainz%{api}
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/libmusicbrainz%{api}.pc
+
+
+%changelog
+* Fri Apr 29 2011 Oden Eriksson <oeriksson@mandriva.com> 3.0.3-2mdv2011.0
++ Revision: 660268
+- mass rebuild
+
+* Wed Oct 20 2010 Götz Waschk <waschk@mandriva.org> 3.0.3-1mdv2011.0
++ Revision: 586907
+- new version
+- drop patch
+
+* Tue Mar 16 2010 Oden Eriksson <oeriksson@mandriva.com> 3.0.2-3mdv2010.1
++ Revision: 520889
+- rebuilt for 2010.1
+
+* Wed May 20 2009 Götz Waschk <waschk@mandriva.org> 3.0.2-2mdv2010.0
++ Revision: 377955
+- fix for gcc 4.4
+
+* Thu Oct 16 2008 Götz Waschk <waschk@mandriva.org> 3.0.2-1mdv2009.1
++ Revision: 294297
+- new version
+- drop patch
+
+* Fri Aug 08 2008 Thierry Vignaud <tv@mandriva.org> 3.0.1-4mdv2009.0
++ Revision: 267922
+- rebuild early 2009.0 package (before pixel changes)
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Sun May 25 2008 Götz Waschk <waschk@mandriva.org> 3.0.1-3mdv2009.0
++ Revision: 211251
+- fix build with gcc 4.3
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Tue Oct 23 2007 Götz Waschk <waschk@mandriva.org> 3.0.1-2mdv2008.1
++ Revision: 101485
+- fix cmake call to have the right libdir on x86_64
+- import libmusicbrainz3
+
+

@@ -1,6 +1,6 @@
 %define package_name    libmusicbrainz
 %define	version	3.0.3
-%define release	%mkrel 2
+%define release	4
 
 %define api 3
 %define major 6
@@ -51,7 +51,7 @@ applications which will use libmusicbrainz.
 %setup -q -n %{package_name}-%{version}
 
 %build
-cmake . -DCMAKE_INSTALL_PREFIX=%_prefix \
+cmake . -DCMAKE_INSTALL_PREFIX=%_prefix -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 %if "%_lib" != "lib"
     -DLIB_SUFFIX=64 \
 %endif

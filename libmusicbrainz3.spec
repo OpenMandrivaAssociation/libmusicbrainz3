@@ -1,25 +1,21 @@
-%define package_name    libmusicbrainz
-%define	version	3.0.3
-%define release	4
+%define oname    libmusicbrainz
+%define api	3
+%define major	6
+%define libname	%mklibname musicbrainz %{api} %{major}
+%define devname	%mklibname -d musicbrainz %{api}
 
-%define api 3
-%define major 6
-%define libname %mklibname musicbrainz %api %{major}
-%define develname %mklibname -d musicbrainz %api
-
-Name:		libmusicbrainz3
-Version:	%{version}
-Release:	%{release}
 Summary:	A software library for accesing MusicBrainz servers
-Source:		http://ftp.musicbrainz.org/pub/musicbrainz/%{package_name}-%{version}.tar.gz
-URL:		http://musicbrainz.org/doc/libmusicbrainz
+Name:		libmusicbrainz3
+Version:	3.0.3
+Release:	5
 Group:		Sound
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 License:	LGPLv2+
-BuildRequires:  cmake
-BuildRequires:  pkgconfig(neon)
-BuildRequires:  libdiscid-devel
-BuildRequires:  libcppunit-devel
+Url:		http://musicbrainz.org/doc/libmusicbrainz
+Source0:	http://ftp.musicbrainz.org/pub/musicbrainz/%{oname}-%{version}.tar.gz
+BuildRequires:	cmake
+BuildRequires:	pkgconfig(cppunit)
+BuildRequires:	pkgconfig(libdiscid)
+BuildRequires:	pkgconfig(neon)
 
 %description
 The MusicBrainz client library allows applications to make metadata
@@ -35,104 +31,34 @@ The MusicBrainz client library allows applications to make metadata
 lookup to a MusicBrainz server, generate signatures from WAV data and
 create CD Index Disk ids from audio CD roms.
 
-%package -n %develname
+%package -n %{devname}
 Summary:	Headers for developing programs that will use libmusicbrainz
 Group:		Development/Other
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 
-%description -n	%develname
+%description -n	%{devname}
 This package contains the headers that programmers will need to develop
 applications which will use libmusicbrainz.
 
-
-
 %prep
-%setup -q -n %{package_name}-%{version}
+%setup -qn %{oname}-%{version}
 
 %build
-cmake . -DCMAKE_INSTALL_PREFIX=%_prefix -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-%if "%_lib" != "lib"
-    -DLIB_SUFFIX=64 \
-%endif
-
+%cmake \
+	-DCMAKE_BUILD_TYPE=RelWithDebInfo
 
 %make
 
-
 %install
-rm -rf %{buildroot}
-
-%makeinstall_std
-
-
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
+%makeinstall_std -C build
 
 %files -n %{libname}
-%defattr(-, root, root)
-%doc AUTHORS.txt COPYING.txt NEWS.txt README.txt
 %{_libdir}/libmusicbrainz%{api}.so.%{major}*
 
-%files -n %develname
-%defattr(-, root, root)
+%files -n %{devname}
+%doc AUTHORS.txt COPYING.txt NEWS.txt README.txt
 %{_includedir}/musicbrainz%{api}
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/libmusicbrainz%{api}.pc
-
-
-%changelog
-* Fri Apr 29 2011 Oden Eriksson <oeriksson@mandriva.com> 3.0.3-2mdv2011.0
-+ Revision: 660268
-- mass rebuild
-
-* Wed Oct 20 2010 Götz Waschk <waschk@mandriva.org> 3.0.3-1mdv2011.0
-+ Revision: 586907
-- new version
-- drop patch
-
-* Tue Mar 16 2010 Oden Eriksson <oeriksson@mandriva.com> 3.0.2-3mdv2010.1
-+ Revision: 520889
-- rebuilt for 2010.1
-
-* Wed May 20 2009 Götz Waschk <waschk@mandriva.org> 3.0.2-2mdv2010.0
-+ Revision: 377955
-- fix for gcc 4.4
-
-* Thu Oct 16 2008 Götz Waschk <waschk@mandriva.org> 3.0.2-1mdv2009.1
-+ Revision: 294297
-- new version
-- drop patch
-
-* Fri Aug 08 2008 Thierry Vignaud <tv@mandriva.org> 3.0.1-4mdv2009.0
-+ Revision: 267922
-- rebuild early 2009.0 package (before pixel changes)
-
-  + Pixel <pixel@mandriva.com>
-    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
-
-* Sun May 25 2008 Götz Waschk <waschk@mandriva.org> 3.0.1-3mdv2009.0
-+ Revision: 211251
-- fix build with gcc 4.3
-
-  + Olivier Blin <oblin@mandriva.com>
-    - restore BuildRoot
-
-  + Thierry Vignaud <tv@mandriva.org>
-    - kill re-definition of %%buildroot on Pixel's request
-
-* Tue Oct 23 2007 Götz Waschk <waschk@mandriva.org> 3.0.1-2mdv2008.1
-+ Revision: 101485
-- fix cmake call to have the right libdir on x86_64
-- import libmusicbrainz3
-
 

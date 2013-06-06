@@ -1,4 +1,4 @@
-%define oname    libmusicbrainz
+%define oname	libmusicbrainz
 %define api	3
 %define major	6
 %define libname	%mklibname musicbrainz %{api} %{major}

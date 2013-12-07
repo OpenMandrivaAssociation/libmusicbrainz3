@@ -7,7 +7,7 @@
 Summary:	A software library for accesing MusicBrainz servers
 Name:		libmusicbrainz3
 Version:	3.0.3
-Release:	6
+Release:	7
 Group:		Sound
 License:	LGPLv2+
 Url:		http://musicbrainz.org/doc/libmusicbrainz

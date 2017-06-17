@@ -7,11 +7,12 @@
 Summary:	A software library for accesing MusicBrainz servers
 Name:		libmusicbrainz3
 Version:	3.0.3
-Release:	14
+Release:	15
 Group:		Sound
 License:	LGPLv2+
 Url:		http://musicbrainz.org/doc/libmusicbrainz
 Source0:	http://ftp.musicbrainz.org/pub/musicbrainz/%{oname}-%{version}.tar.gz
+Patch0:		libmusicbrainz-3.0.3-c++11.patch
 BuildRequires:	cmake
 BuildRequires:	pkgconfig(cppunit)
 BuildRequires:	pkgconfig(libdiscid)
@@ -43,6 +44,7 @@ applications which will use libmusicbrainz.
 
 %prep
 %setup -qn %{oname}-%{version}
+%apply_patches
 
 %build
 %cmake \

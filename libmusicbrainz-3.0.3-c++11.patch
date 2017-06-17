@@ -1,0 +1,31 @@
+--- libmusicbrainz-3.0.3/CMakeLists.txt.0000~	2010-09-27 19:46:01.000000000 +0200
++++ libmusicbrainz-3.0.3/CMakeLists.txt	2017-06-17 14:09:09.596995347 +0200
+@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 2.6)
+ PROJECT(libmusicbrainz3)
+ SET(PROJECT_VERSION 3.0.3)
+ 
++SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
++
+ # 1. If the library source code has changed at all since the last update, then increment revision.
+ # 2. If any interfaces have been added, removed, or changed since the last update, increment current, and set revision to 0.
+ # 3. If any interfaces have been added since the last public release, then increment age.
+--- libmusicbrainz-3.0.3/src/webservice.cpp.0000~	2009-08-18 00:54:07.000000000 +0200
++++ libmusicbrainz-3.0.3/src/webservice.cpp	2017-06-17 14:07:57.928788369 +0200
+@@ -184,7 +184,7 @@ WebService::get(const std::string &entit
+ 	if (!sess) 
+ 		throw WebServiceError("ne_session_create() failed.");
+ 	ne_set_server_auth(sess, httpAuth, this);
+-	ne_set_useragent(sess, PACKAGE"/"VERSION);
++	ne_set_useragent(sess, PACKAGE "/" VERSION);
+ 	
+ 	// Use proxy server
+ 	if (!d->proxyHost.empty()) {
+@@ -269,7 +269,7 @@ WebService::post(const std::string &enti
+ 	if (!sess) 
+ 		throw WebServiceError("ne_session_create() failed.");
+ 	ne_set_server_auth(sess, httpAuth, this);
+-	ne_set_useragent(sess, PACKAGE"/"VERSION);
++	ne_set_useragent(sess, PACKAGE "/" VERSION);
+ 
+ 	// Use proxy server
+ 	if (!d->proxyHost.empty()) {

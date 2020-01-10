@@ -44,7 +44,7 @@ applications which will use libmusicbrainz.
 
 %prep
 %setup -qn %{oname}-%{version}
-%apply_patches
+%autopatch -p1
 
 %build
 %cmake \

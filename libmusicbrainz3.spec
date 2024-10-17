@@ -10,7 +10,7 @@ Version:	3.0.3
 Release:	17
 Group:		Sound
 License:	LGPLv2+
-Url:		http://musicbrainz.org/doc/libmusicbrainz
+Url:		https://musicbrainz.org/doc/libmusicbrainz
 Source0:	http://ftp.musicbrainz.org/pub/musicbrainz/%{oname}-%{version}.tar.gz
 Patch0:		libmusicbrainz-3.0.3-c++11.patch
 BuildRequires:	cmake
